@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-sm-3"></div>
             <div class="col-sm-6 border-whitesmoke">
-                <form action="<?= base_url('mainmenu/validation') ?>" method="post">
+                <form action="<?= base_url('mainmenu/validation') ?>" method="post" enctype="multipart/form-data">
                     <div class="row mt-3">
                         <div class="col-sm-3">
                             <label>Nama</label>
@@ -33,6 +33,14 @@
                             <small id="helpId" class="form-text text-muted"><?php echo form_error('password') ?></small>
                         </div>
                     </div>
+                    <div class="row mt-3">
+                        <div class="col-sm-3">
+                            <label>Gambar</label>
+                        </div>
+                        <div class="col-sm">
+                            <input type="file" class="form-control-file" name="photo">
+                        </div>
+                    </div>
                     <button class="btn btn-primary mt-3 width-full" type="submit">Submit</button>
                 </form>
             </div>
@@ -45,6 +53,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
+                        <th>Gambar</th>
                         <th>Email</th>
                         <th>Password</th>
                         <th>Action</th>
@@ -53,11 +62,12 @@
                 <tbody>
                     <?php
                     $count = 1;
-                    foreach ($user as $us) {
+                    foreach ($data->result() as $us) {
                         ?>
                         <tr>
                             <td><?php echo $count++ ?></td>
                             <td><?php echo $us->nama ?></td>
+                            <td><?php echo "<img src='" . base_url("assets/upload/" . $us->gambar) . "' width='100' height='100'>" ?></td>
                             <td><?php echo $us->email ?></td>
                             <td><?php echo $us->password ?></td>
                             <td>
@@ -68,6 +78,12 @@
                     <?php } ?>
                 </tbody>
             </table>
+        </div>
+        <div class="row">
+            <div class="col">
+                <!--Tampilkan pagination-->
+                <?php echo $pagination; ?>
+            </div>
         </div>
     </div>
     <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">

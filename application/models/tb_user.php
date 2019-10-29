@@ -6,9 +6,9 @@ class Tb_user extends CI_Model
         $this->db->insert($table, $data);
     }
 
-    public function ambil_data()
+    public function ambil_data($limit, $start)
     {
-        return $this->db->get('user');
+        return $this->db->get('user', $limit, $start);
     }
 
     public function edit_data($table, $where)
