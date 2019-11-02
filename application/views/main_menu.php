@@ -5,6 +5,7 @@
         <div class="row">
             <div class="col-sm-3"></div>
             <div class="col-sm-6 border-whitesmoke">
+                <p><?php echo $converty ?></p>
                 <form action="<?= base_url('mainmenu/validation') ?>" method="post" enctype="multipart/form-data">
                     <div class="row mt-3">
                         <div class="col-sm-3">
@@ -30,6 +31,7 @@
                         </div>
                         <div class="col-sm">
                             <input type="password" class="form-control" name="password">
+                            <input type="hidden" class="form-control" name="modify" value="<?= $date_now ?>" >
                             <small id="helpId" class="form-text text-muted"><?php echo form_error('password') ?></small>
                         </div>
                     </div>

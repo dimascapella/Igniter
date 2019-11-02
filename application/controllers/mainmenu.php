@@ -7,13 +7,14 @@ class Mainmenu extends CI_Controller
     {
         parent::__construct();
         $this->load->model('tb_user');
+        $this->load->helper('tanggal');
     }
 
     public function index()
     {
         $config['base_url'] = site_url('mainmenu/index/');
         $config['total_rows'] = $this->db->count_all('user');
-        $config['per_page'] = 4;
+        $config['per_page'] = 5;
         $config["uri_segment"] = 3;
         $choice = $config["total_rows"] / $config["per_page"];
         $config["num_links"] = floor($choice);
@@ -36,9 +37,12 @@ class Mainmenu extends CI_Controller
         $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
         $config['last_tagl_close']  = '</span></li>';
         $this->pagination->initialize($config);
+
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
         $data['data'] = $this->tb_user->ambil_data($config["per_page"], $data['page']);
         $data['pagination'] = $this->pagination->create_links();
+        $data['date_now'] = tanggal();
+        $data['converty'] = convert_bulan();
         $this->load->view('header');
         $this->load->view('main_menu', $data);
     }
@@ -65,6 +69,7 @@ class Mainmenu extends CI_Controller
         $nama = $this->input->post('nama');
         $email = $this->input->post('email');
         $password = $this->input->post('password');
+        $modify = $this->input->post('modify');
         if (!$this->upload->do_upload('photo')) {
             $image = "";
         } else {
@@ -74,7 +79,8 @@ class Mainmenu extends CI_Controller
             'nama' => $nama,
             'gambar' => $image,
             'email' => $email,
-            'password' => $password
+            'password' => $password,
+            'modify' => $modify
         );
         $this->tb_user->tambah_data('user', $data);
         redirect('mainmenu/');
