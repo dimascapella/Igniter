@@ -31,7 +31,7 @@
                         </div>
                         <div class="col-sm">
                             <input type="password" class="form-control" name="password">
-                            <input type="hidden" class="form-control" name="modify" value="<?= $date_now ?>" >
+                            <input type="hidden" class="form-control" name="modify" value="<?= $date_now ?>">
                             <small id="helpId" class="form-text text-muted"><?php echo form_error('password') ?></small>
                         </div>
                     </div>
@@ -57,6 +57,7 @@
                         <th>Nama</th>
                         <th>Gambar</th>
                         <th>Email</th>
+                        <th>Modify</th>
                         <th>Password</th>
                         <th>Action</th>
                     </tr>
@@ -65,12 +66,14 @@
                     <?php
                     $count = 1;
                     foreach ($data->result() as $us) {
+
                         ?>
                         <tr>
                             <td><?php echo $count++ ?></td>
                             <td><?php echo $us->nama ?></td>
                             <td><?php echo "<img src='" . base_url("assets/upload/" . $us->gambar) . "' width='100' height='100'>" ?></td>
                             <td><?php echo $us->email ?></td>
+                            <td><?php echo date('d-m-Y', strtotime($us->modify)); ?></td>
                             <td><?php echo $us->password ?></td>
                             <td>
                                 <a href="<?php echo site_url('mainmenu/edit/') . $us->id ?>"><button class="btn btn-primary">Edit</button></a>
