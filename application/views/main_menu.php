@@ -53,7 +53,7 @@
             <table class="table table-bordered text-center">
                 <thead class="thead-light">
                     <tr>
-                        <th>No</th>
+                        <th>Nomor</th>
                         <th>Nama</th>
                         <th>Gambar</th>
                         <th>Email</th>
